@@ -1,18 +1,24 @@
+import 'package:car_ecommerce/model/car_model.dart';
 import 'package:flutter/material.dart';
 
 class CarListCard extends StatelessWidget {
+  final Car car;
+
+
+  CarListCard({this.car});
+
   Widget _buildCarDetails() {
     return Column(
       children: <Widget>[
         Text(
-          'Chevy Camaro',
+          car.name,
           style: TextStyle(fontSize: 25.0, color: Colors.black),
         ),
         SizedBox(
           height: 10.0,
         ),
         Text(
-          'Diesel and Petrol',
+          car.description,
           style: TextStyle(fontSize: 22.0, color: Colors.grey),
         ),
 
@@ -29,17 +35,19 @@ class CarListCard extends StatelessWidget {
   }
 
   Widget _buildNameImage() {
-    return Row(
-      children: <Widget>[
-        Expanded(
-          flex: 7,
-          child: _buildCarDetails(),
-        ),
-        Expanded(
-          flex: 3,
-          child: _buildImage(),
-        )
-      ],
+    return Card(
+      child: Row(
+        children: <Widget>[
+          Expanded(
+            flex: 7,
+            child: _buildCarDetails(),
+          ),
+          Expanded(
+            flex: 3,
+            child: _buildImage(),
+          )
+        ],
+      ),
     );
   }
 
