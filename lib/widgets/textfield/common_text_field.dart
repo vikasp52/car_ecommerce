@@ -9,6 +9,7 @@ class AddTextField extends StatefulWidget {
   final TextInputType keyboardType;
   final String initialValue;
   final int maxCharecters;
+  final bool obscureText;
 
   AddTextField(
       {this.label,
@@ -17,6 +18,7 @@ class AddTextField extends StatefulWidget {
         this.maxCharecters,
         this.initialValue,
         this.stream,
+        this.obscureText = false,
         this.keyboardType = TextInputType.text,
         this.hintText});
 
@@ -38,6 +40,7 @@ class _AddTextFieldState extends State<AddTextField> {
         //controller: _controller,
         textAlign: TextAlign.start,
         keyboardType: widget.keyboardType,
+        obscureText: widget.obscureText,
         style: TextStyle(fontSize: 22, color: Colors.black),
         cursorColor: Colors.black,
         decoration: InputDecoration(

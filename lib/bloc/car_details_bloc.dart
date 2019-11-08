@@ -31,7 +31,7 @@ class CarDetailsBloc{
     final MailOptions mailOptions = MailOptions(
       body: _messageController.value,
       subject: '${_nameController.value} : Enquiry about car.',
-      recipients: ['example@example.com'],
+      recipients: ['developer@aigen.tech'],
       isHTML: true,
     );
 
