@@ -1,5 +1,4 @@
 import 'package:car_ecommerce/screens/home_screen.dart';
-import 'package:car_ecommerce/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
@@ -10,10 +9,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primaryColor: Colors.white,
+        canvasColor: Colors.white,
+        textSelectionHandleColor: Colors.black,
       ),
-      home: LoginScreen(),
+      home: MyHomePage(),
     );
   }
 }

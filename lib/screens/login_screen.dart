@@ -1,6 +1,7 @@
 import 'package:car_ecommerce/bloc/login_bloc.dart';
 import 'package:car_ecommerce/widgets/textfield/common_text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class LoginScreen extends StatelessWidget {
   final _loginBloc = LoginBloc();
@@ -27,15 +28,36 @@ class LoginScreen extends StatelessWidget {
               onChange: _loginBloc.passwordSink,
               //maxCharecters: 20,
             ),
-            StreamBuilder<bool>(
-              stream: _loginBloc.submitCheck,
-              initialData: false,
-              builder: (context, snapshot) {
-                return RaisedButton(onPressed: !snapshot.data?null:(){
-                  _loginBloc.validateUser(context: context);
-                }, child: Text('Login'),);
-              }
-            )
+            StreamBuilder(
+                stream: _loginBloc.invalidCredentialStream,
+                builder: (context, snapshotInvalidCredential) {
+
+                  if(snapshotInvalidCredential.hasData && snapshotInvalidCredential.data){
+                    Fluttertoast.showToast(
+                        msg:
+                        "Invalid Credential",
+                        toastLength: Toast.LENGTH_LONG,
+                        gravity: ToastGravity.BOTTOM,
+                        timeInSecForIos: 10,
+                        backgroundColor: Colors.red,
+                        textColor: Colors.white,
+                        fontSize: 20.0);
+                  }
+
+                  return StreamBuilder<bool>(
+                      stream: _loginBloc.submitCheck,
+                      initialData: false,
+                      builder: (context, snapshot) {
+                        return RaisedButton(
+                          onPressed: (snapshot.hasData && snapshot.data)
+                              ? () {
+                                  _loginBloc.validateUser(context: context);
+                                }
+                              : null,
+                          child: Text('Login'),
+                        );
+                      });
+                })
           ],
         ),
       ),

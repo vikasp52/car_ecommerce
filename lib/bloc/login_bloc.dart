@@ -18,6 +18,11 @@ class LoginBloc {
 
   Function(String) get passwordSink => _passwordController.sink.add;
 
+
+  static final _invalidCredentialController = BehaviorSubject<bool>.seeded(false);
+
+  Stream<bool> get invalidCredentialStream => _invalidCredentialController.stream;
+
   Stream<bool> get submitCheck => Observable.combineLatest2(usernameStream, passwordStream, (n, g) {
         if ((_userNameController.value != null &&
                 _userNameController.value != '') &&
@@ -34,6 +39,7 @@ class LoginBloc {
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=>MyHomePage()));
     }else{
       print('Invalid credential');
+      _invalidCredentialController.add(true);
     }
 
   }
@@ -50,5 +56,6 @@ class LoginBloc {
   void dispose() {
     _userNameController.close();
     _passwordController.close();
+    _invalidCredentialController.close();
   }
 }

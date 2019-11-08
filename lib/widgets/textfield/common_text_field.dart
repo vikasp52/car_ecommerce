@@ -29,7 +29,9 @@ class _AddTextFieldState extends State<AddTextField> {
     bool _validate = false;
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: TextField(
+      child: Theme(data: ThemeData(
+        primaryColor: Colors.black,
+      ), child: TextField(
         maxLines: widget.maxLine,
         onChanged: widget.onChange,
         maxLength: widget.maxCharecters,
@@ -37,23 +39,26 @@ class _AddTextFieldState extends State<AddTextField> {
         textAlign: TextAlign.start,
         keyboardType: widget.keyboardType,
         style: TextStyle(fontSize: 22, color: Colors.black),
+        cursorColor: Colors.black,
         decoration: InputDecoration(
           labelText: widget.label,
           hintText: widget.hintText,
           errorText: error,
+          focusColor: Colors.black,
           labelStyle: TextStyle(
-            color: Colors.black,
+              color: Colors.black,
+              decorationColor: Colors.black
           ),
-          border: new OutlineInputBorder(
-              borderSide: new BorderSide(color: Colors.grey)),
+          border: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.black)),
         ),
-      ),
+      ),)
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<Object>(
+    return StreamBuilder(
         stream: widget.stream,
         builder: (context, snapshotData) {
           print('Date: ${snapshotData.data}');

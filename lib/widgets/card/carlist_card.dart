@@ -4,55 +4,60 @@ import 'package:flutter/material.dart';
 class CarListCard extends StatelessWidget {
   final Car car;
 
-
   CarListCard({this.car});
 
   Widget _buildCarDetails() {
-    return Column(
-      children: <Widget>[
-        Text(
-          car.name,
-          style: TextStyle(fontSize: 25.0, color: Colors.black),
+    return Padding(
+      padding: const EdgeInsets.all(20.0),
+      child: Card(
+        elevation: 10.0,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            SizedBox(height: 10.0,),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              child: Text(
+                car.name,
+                style: TextStyle(
+                  fontSize: 25.0,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 5.0,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              child: Text(
+                'Diesel, Automatic (17.1 kmpl)',
+                style: TextStyle(fontSize: 15.0, color: Colors.grey),
+              ),
+            ),
+            SizedBox(
+              height: 5.0,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              child: Text(
+                '₹ ${car.price} Lakhs',
+                style: TextStyle(fontSize: 20.0, color: Colors.red, fontWeight: FontWeight.bold, ),
+              ),
+            ),
+            Center(child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Image.asset(car.imagePath, height: 200.0,),
+            )),
+          ],
         ),
-        SizedBox(
-          height: 10.0,
-        ),
-        Text(
-          car.description,
-          style: TextStyle(fontSize: 22.0, color: Colors.grey),
-        ),
-
-        Text(
-          '₹ 60.6 Lakhs',
-          style: TextStyle(fontSize: 25.0, color: Colors.black),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildImage(){
-    return Image(image: NetworkImage('https://banner2.cleanpng.com/20180125/crq/kisspng-bmw-x5-car-bmw-m5-bmw-5-series-white-bmw-5a6a7f728dea61.6936699415169288825813.jpg'));
-  }
-
-  Widget _buildNameImage() {
-    return Card(
-      child: Row(
-        children: <Widget>[
-          Expanded(
-            flex: 7,
-            child: _buildCarDetails(),
-          ),
-          Expanded(
-            flex: 3,
-            child: _buildImage(),
-          )
-        ],
       ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return _buildNameImage();
+    return _buildCarDetails();
   }
 }
